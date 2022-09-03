@@ -1,9 +1,10 @@
 const express = require('express')
-const propertyController = require('../controller/propertiesController')
+const propertyController = require('../controller/propertyController')
 const propertyRoute = express.Router()
 
 propertyRoute
 .route('/')
-.get(propertyController.getAllProperties)
+.get(propertyController.getAllProperty)
+.post(propertyController.createProperty)
 
 module.exports = propertyRoute;

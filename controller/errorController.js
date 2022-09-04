@@ -1,16 +1,13 @@
 const AppError = require("./../utilties/appError")
 
-const setCastError = err => new AppError(`the user isnt found with ID : / ${err.value} /`, 404)
 
 
-
+const setCastError = err => new AppError(`resource is not found with ID : / ${err.value} /`, 404)
 const setDuplicateNameError = err => {
     if (err.keyPattern.email === 1) err.keyValue.name = 'Email';
     const msg = err.keyValue.name == 'Email' ? `Already user have same : / ${err.keyValue.name} /` : `Already user have same name : / ${err.keyValue.name} /`
     return new AppError(msg, 404)
 }
-
-
 const setValidatorError = err => {
     const msgs = Object.values(err.errors).map(el => el.message).join(',');
     return new AppError(`/ ${msgs}  /`, 404);
@@ -38,7 +35,6 @@ const productionError = (err, req, res) => {
 }
 
 const developmentError = (err, req, res) => {
-
 
         res.status(err.statusCode).json({
             message: err.message,

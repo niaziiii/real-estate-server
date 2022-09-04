@@ -35,21 +35,21 @@ const schema = mongoose.Schema({
         required:[true,'Property Bathrooms not provided']
     },
     description :{
-        type:Array,
-        required:[true,'Property description not provided']
+        type:String,
     },
     coverImages :{
         type:Array,
-        required:[true,'Property Bathrooms not provided']
     },
     amenities :{
         type:Array,
-        required:[true,'Property Bathrooms not provided']
     },
     details :{
         type:Array,
-        required:[true,'Property Bathrooms not provided']
     },
+    createdAt : {
+        type : Date,
+        default : Date.now
+    }
 
 }, {
     toJSON: { virtuals: true },

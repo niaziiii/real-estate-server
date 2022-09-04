@@ -11,6 +11,8 @@ const AppError = require('./utilties/appError')
 const globalErrorHandler = require('./controller/errorController')
 
 const propertyRoute = require('./routes/propertiesRoute')
+const visitRoute = require('./routes/visitBookRoute')
+
 
 
 
@@ -24,7 +26,9 @@ app.use(cors())
 
 
 
-app.use('/',propertyRoute)
+app.use('/api/v1/visit',visitRoute)
+app.use('/api/v1',propertyRoute)
+
 
 app.all('*', (req, res, next) => {
     // console.log(req.originalUrl);

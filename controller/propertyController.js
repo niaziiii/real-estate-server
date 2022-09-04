@@ -30,7 +30,7 @@ exports.createProperty = catchAsync(async (req, res, next) => {
 
 exports.getProperty = catchAsync(async (req, res, next) => {
     const property = await PropertySchema.findById(req.params.id)
-    if (!property) return next(AppError('resource is not available', 404))
+    if (!property) return next(new AppError('resource is not available', 404))
     const totalPropertyBasedOnType = await PropertySchema.find({ type: property.type })
     const othersProperty = totalPropertyBasedOnType.slice(0, 3)
 

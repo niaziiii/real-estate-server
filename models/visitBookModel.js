@@ -30,6 +30,10 @@ const schema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    property:{
+        type: mongoose.Schema.ObjectId,
+        ref: 'properties',
+    },
     createdAt: {
         type: Date,
         default: Date.now

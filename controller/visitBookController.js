@@ -3,7 +3,7 @@ const AppError = require("../utilties/appError");
 const catchAsync = require("../utilties/catchAsync");
 
 exports.getAllVisits = catchAsync(async (req, res, next) => {
-    const visitors = await BookSchema.find({ isVisited: false })
+    const visitors = await BookSchema.find({ isVisited: false }).populate('property')
 
     res.status(200).json({
         status: 'success',
@@ -23,17 +23,16 @@ exports.createVisit = catchAsync(async (req, res, next) => {
 })
 
 exports.getVisit = catchAsync(async (req, res, next) => {
-    const visitor = await BookSchema.findById(req.params.id)
+    const visitor = await BookSchema.findById(req.params.id).populate('property')
     res.status(200).json({
         status: 'success',
         data: visitor
     })
 })
 
-
 exports.updateVisit = catchAsync(async (req, res, next) => {
     const { isVisited } = req.body;
-    if (!isVisited) next(new AppError('Furthur action could not procede', 404))
+    if (!isVisited) return next(new AppError('Furthur action could not procede', 404))
 
     const visit = await BookSchema.findByIdAndUpdate(req.params.id, req.body , {
         new: true,
